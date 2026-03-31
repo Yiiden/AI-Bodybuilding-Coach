@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <title>AI Bodybuilding Coach</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="home-body">
+    <div class="home-container">
+        <h1 class="title">💪 AI Bodybuilding Coach</h1>
+        
+        <form method="POST" class="main-form">
+            <div class="preview-box-home">
+                <img id="pose-preview" src="" alt="動作範例">
+            </div>
+
+            <div class="controls-wrapper">
+                
+                <div class="form-group">
+                    <label for="pose-select">選擇動作：</label>
+                    <select id="pose-select" name="pose_selector" class="pose-select" onchange="updatePreview()">
+                        {% for key, val in pose_data.items() %}
+                        <option value="{{ key }}" data-img="{{ val.img_filename }}">{{ val.name_zh }} ({{ key }})</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>身體數值 (供 AI 參考)：</label>
+                    <div class="inputs-row">
+                        <input type="number" name="age" placeholder="年齡" required class="input-stat">
+                        <input type="number" name="height" placeholder="身高 (cm)" required class="input-stat">
+                        <input type="number" name="weight" placeholder="體重 (kg)" required class="input-stat">
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn btn-primary start-btn">進入訓練室</button>
+            </div>
+        </form>
+    </div>
+
+<script>
+    function updatePreview() {
+        const select = document.getElementById('pose-select');
+        const imgName = select.options[select.selectedIndex].getAttribute('data-img');
+        // 確保圖片路徑正確
+        if (imgName) {
+            document.getElementById('pose-preview').src = "/static/images/" + imgName;
+        }
+    }
+    // 初始化執行一次
+    window.onload = updatePreview;
+</script>
+</body>
+</html>

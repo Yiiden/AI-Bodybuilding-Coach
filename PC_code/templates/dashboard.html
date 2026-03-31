@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <title>Training Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="dashboard-container">
+        <h2>目前訓練: <span class="highlight">{{ target_pose }}</span></h2>
+        
+        <div class="monitor-row">
+            
+            <div class="monitor-wrapper">
+                <div class="monitor-box">
+                    <div class="monitor-label">🔴 Live Stream (即時)</div>
+                    <img id="live-image" src="" alt="等待訊號...">
+                    <div id="countdown-overlay">15</div> 
+                </div>
+                <div class="mini-score-box">
+                    <div class="mini-score-title">即時評分</div>
+                    <div id="score-val" class="mini-score-val">0</div>
+                </div>
+            </div>
+
+            <div class="monitor-wrapper">
+                <div class="monitor-box">
+                    <div class="monitor-label">📸 Snapshot (動作照)</div>
+                    <img id="snapshot-image" src="/static/images/placeholder_black.png" alt="尚無照片">
+                </div>
+                <div class="mini-score-box">
+                    <div class="mini-score-title">動作照評分</div>
+                    <div id="snapshot-score-val" class="mini-score-val">--</div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="controls-section">
+            <button id="btn-start" class="btn btn-record" onclick="startCountdown()">📸 開始 15秒倒數</button>
+            <a href="/" class="btn btn-back">↩ 切換動作</a>
+        </div>
+
+        <div class="info-row">
+            <div class="advice-box">
+                <h3>🤖 AI 教練講評:</h3>
+                <div id="advice-content">請開始訓練...</div>
+            </div>
+            
+            <div class="video-box">
+                <h3>📺 動作教學:</h3>
+                {% if youtube_id %}
+                <iframe width="100%" height="315" 
+                        src="https://www.youtube.com/embed/{{ youtube_id }}" 
+                        frameborder="0" allowfullscreen>
+                </iframe>
+                {% else %}
+                <p style="color:#666; padding:20px;">(未設定教學影片)</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
