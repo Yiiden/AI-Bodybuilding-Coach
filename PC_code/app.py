@@ -9,7 +9,7 @@ app = Flask(__name__)
 # ==========================================
 # 設定區 (請填入您的 API Key)
 # ==========================================
-GEMINI_API_KEY = "AIzaSyA0LlMiA3a9efQnuLkhQ5rRRbDOoEaBe2Q"  # <--- 請確認這裡有填入您的 Key
+GEMINI_API_KEY = ""  # <--- 請確認這裡有填入您的 Key
 # ==========================================
 
 @app.route('/', methods=['GET', 'POST'])

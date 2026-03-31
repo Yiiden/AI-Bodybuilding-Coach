@@ -1,0 +1,8 @@
+# macOS specific
+.DS_Store
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+# Ignore large media
+簡報&demo/
